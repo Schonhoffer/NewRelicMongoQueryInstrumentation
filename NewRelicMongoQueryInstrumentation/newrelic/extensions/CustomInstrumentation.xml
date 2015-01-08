@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension xmlns="urn:newrelic-extension">
+  <instrumentation>
+
+    <tracerFactory>
+      <match assemblyName="NewRelicMongoQueryInstrumentation" className="NewRelicMongoQueryInstrumentation.GenericClass`1">
+        <exactMethodMatcher methodName="Method" />
+      </match>
+    </tracerFactory>
+
+    <tracerFactory>
+      <match assemblyName="MongoDB.Driver" className="MongoDB.Driver.Operations.QueryOperation`1"> 
+        <exactMethodMatcher methodName="GetFirstBatch" /> 
+        <exactMethodMatcher methodName="GetNextBatch" /> 
+        <exactMethodMatcher methodName="KillCursor" /> 
+      </match> 
+      <match assemblyName="MongoDB.Driver" className="MongoDB.Driver.Operations.InsertOperation">
+        <exactMethodMatcher methodName="Execute" />
+      </match>
+      <match assemblyName="MongoDB.Driver" className="MongoDB.Driver.Operations.RemoveOperation">
+        <exactMethodMatcher methodName="Execute" />
+      </match>
+      <match assemblyName="MongoDB.Driver" className="MongoDB.Driver.Operations.UpdateOperation">
+        <exactMethodMatcher methodName="Execute" />
+      </match>
+    </tracerFactory>
+
+  </instrumentation>
+</extension>
